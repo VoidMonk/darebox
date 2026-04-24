@@ -18,8 +18,8 @@ A single server for a single web service is powerful enough in 99% of production
 ## Requirements
 
 * Domain name(s) for the app
-* A server (VM, VPS, cloud or bare-metal) with minimum 2GB RAM, 1 CPU and 40GB storage ([Vultr](https://www.vultr.com/) or [Hetzner](https://www.hetzner.com/) recommended for servers, or any other provider). For domain mapping and SSL certificate provisioning, add an `A` or `AAAA` type DNS record in your domain provider's control panel to point the domain name(s) to the server IP address.
-* Linux and Docker Engine installed
+* A server (VM, VPS or bare-metal) with minimum 2GB RAM, 1 CPU and 40GB storage ([Vultr](https://www.vultr.com/) or [Hetzner](https://www.hetzner.com/) recommended for servers, or use any other provider). For domain mapping and SSL certificate provisioning, add an `A` or `AAAA` type DNS record in your domain provider's control panel to point the domain name(s) to the server IP address.
+* Linux and Docker Engine installed on server
 * GitHub for app repo (private or public) and packages
 
 ## Usage
@@ -42,7 +42,7 @@ A single server for a single web service is powerful enough in 99% of production
     docker compose up -d
     ```
 
-    Within a few minutes your app will be deployed and accessible over HTTPS.
+    Within a few seconds your app will be deployed and accessible over HTTPS.
 
 3. Create these in GitHub repo settings:
 
