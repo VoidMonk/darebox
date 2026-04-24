@@ -56,7 +56,7 @@ A single server for a single web service is powerful and reliable enough for mos
     ```conf
     WATCHTOWER_TOKEN = ######
     ```
-    *(change placeholder to the same strong random string used with configuration script)*
+    *(change placeholder to the same strong random string used with configurator script)*
 
     Pushed commits or manually run workflow will publish latest package and auto-update the app container.
 
