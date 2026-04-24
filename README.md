@@ -19,7 +19,7 @@ A single server for a single web service is powerful enough in 99% of production
 
 * Domain name(s) for the app
 * A server (VM, VPS or bare-metal) with minimum 2GB RAM, 1 CPU and 40GB storage ([Vultr](https://www.vultr.com/) or [Hetzner](https://www.hetzner.com/) recommended for servers, or use any other provider). For domain mapping and SSL certificate provisioning, add an `A` or `AAAA` type DNS record in your domain provider's control panel to point the domain name(s) to the server IP address.
-* Linux and Docker Engine installed on server
+* Docker Engine and Compose plugin installed on server running Linux (all pre-installed if using a Docker image on Vultr or Hetzner)
 * GitHub for app repo (private or public) and packages
 
 ## Usage
