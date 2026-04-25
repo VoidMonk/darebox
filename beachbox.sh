@@ -71,6 +71,18 @@ if [ -z "$WEBHOOK_TOKEN_ANS" ]; then
     exit 1
 fi
 
+# Check if .env or compose.yml or Caddyfile already exist to avoid accidental overwrite
+for f in .env compose.yml Caddyfile; do
+  if [ -e "$f" ]; then
+    read -n 1 -r -p "Warning: $f already exists and will be overwritten. Continue? (y/n): " OVERWRITE_ANS
+    echo
+    if [[ ! "$OVERWRITE_ANS" =~ ^[Yy]$ ]]; then
+      echo "Aborted by user."
+      exit 1
+    fi
+  fi
+done
+
 # Start generating files
 echo -e "\n\nCreating .env file.."
 cat << EOF > .env
