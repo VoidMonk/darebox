@@ -36,26 +36,26 @@ if [[ "$CR_LOGIN_ANS" =~ ^[Yy]$ ]]; then
 fi
 
 # Ask for repo, app, domain details
-read -p "* Enter repo owner and project (as lowercase owner/project) of app container image: " OWNER_PROJECT_ANS
+read -r -p "* Enter repo owner and project (as lowercase owner/project) of app container image: " OWNER_PROJECT_ANS
 if [ -z "$OWNER_PROJECT_ANS" ]; then
     echo 'Error: Owner/project cannot be blank'
     exit 1
 fi
 
-read -p "* Enter a name for app container: " APP_NAME_ANS
+read -r -p "* Enter a name for app container: " APP_NAME_ANS
 if [ -z "$APP_NAME_ANS" ]; then
     echo 'Error: Name cannot be blank'
     exit 1
 fi
 
-read -p "* Enter one or more domain names (space separated) for app container: " ALL_DOMAINS_ANS
+read -r -p "* Enter one or more domain names (space separated) for app container: " ALL_DOMAINS_ANS
 if [ -z "$ALL_DOMAINS_ANS" ]; then
     echo 'Error: Domains cannot be blank'
     exit 1
 fi
 
 if [[ $ALL_DOMAINS_ANS = *" "* ]]; then
-    read -p "* Enter the domain name (one of above) to use for Watchtower container update webhook: " WEBHOOK_DOMAIN_ANS
+    read -r -p "* Enter the domain name (one of above) to use for Watchtower container update webhook: " WEBHOOK_DOMAIN_ANS
     if [ -z "$WEBHOOK_DOMAIN_ANS" ]; then
         echo 'Error: Domain cannot be blank'
         exit 1
@@ -65,7 +65,7 @@ else
 fi
 
 # Ask for Watchtower webhook token
-read -s -p "* Enter the auth token (strong random string) for Watchtower webhook (HTTP API): " WEBHOOK_TOKEN_ANS
+read -s -r -p "* Enter the auth token (strong random string) for Watchtower webhook (HTTP API): " WEBHOOK_TOKEN_ANS
 if [ -z "$WEBHOOK_TOKEN_ANS" ]; then
     echo 'Error: Token cannot be blank'
     exit 1
