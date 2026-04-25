@@ -35,41 +35,44 @@ if [[ "$CR_LOGIN_ANS" =~ ^[Yy]$ ]]; then
     docker login ghcr.io
 fi
 
+# Ask for repo, app, domain details
 read -p "* Enter repo owner and project (as lowercase owner/project) of app container image: " OWNER_PROJECT_ANS
 if [ -z "$OWNER_PROJECT_ANS" ]; then
-    echo 'Owner/project cannot be blank'
+    echo 'Error: Owner/project cannot be blank'
     exit 1
 fi
 
 read -p "* Enter a name for app container: " APP_NAME_ANS
 if [ -z "$APP_NAME_ANS" ]; then
-    echo 'Name cannot be blank'
+    echo 'Error: Name cannot be blank'
     exit 1
 fi
 
 read -p "* Enter one or more domain names (space separated) for app container: " ALL_DOMAINS_ANS
 if [ -z "$ALL_DOMAINS_ANS" ]; then
-    echo 'Domains cannot be blank'
+    echo 'Error: Domains cannot be blank'
     exit 1
 fi
 
 if [[ $ALL_DOMAINS_ANS = *" "* ]]; then
-    read -p "* Enter the domain name (one of above) for Watchtower container update webhook: " WEBHOOK_DOMAIN_ANS
+    read -p "* Enter the domain name (one of above) to use for Watchtower container update webhook: " WEBHOOK_DOMAIN_ANS
     if [ -z "$WEBHOOK_DOMAIN_ANS" ]; then
-        echo 'Domain cannot be blank'
+        echo 'Error: Domain cannot be blank'
         exit 1
     fi
 else
     WEBHOOK_DOMAIN_ANS=$ALL_DOMAINS_ANS
 fi
 
+# Ask for Watchtower webhook token
 read -s -p "* Enter the auth token (strong random string) for Watchtower webhook (HTTP API): " WEBHOOK_TOKEN_ANS
 if [ -z "$WEBHOOK_TOKEN_ANS" ]; then
-    echo 'Token cannot be blank'
+    echo 'Error: Token cannot be blank'
     exit 1
 fi
 
-echo -e "\n\nCreating env file.."
+# Start generating files
+echo -e "\n\nCreating .env file.."
 cat << EOF > .env
 OWNER_PROJECT="$OWNER_PROJECT_ANS"
 APP_NAME="$APP_NAME_ANS"
@@ -77,7 +80,7 @@ ALL_DOMAINS="$ALL_DOMAINS_ANS"
 WEBHOOK_DOMAIN="$WEBHOOK_DOMAIN_ANS"
 WEBHOOK_TOKEN="$WEBHOOK_TOKEN_ANS"
 EOF
-echo -e "Env file created!\n"
+echo -e "env file created!\n"
 
 echo "Creating Caddyfile.."
 cat << 'EOF' > Caddyfile
@@ -167,3 +170,4 @@ EOF
 echo -e "Docker compose file created!\n"
 
 echo -e "All files created. Check files, and then start all services with 'docker compose up -d' \n"
+echo -e "Access your self-hosted app at its domain name!\n"
